@@ -2,8 +2,8 @@ import math
 
 
 def getNumber():
-    num = input("Podaj liczbę: ")
-    print("Podano liczbę: " + num)
+    num = input("Insert the number: ")
+    print("Your number is: " + num)
     return num
 
 
@@ -28,8 +28,8 @@ def changeString(number, arr):
     for i in range(x):
         finalNum = finalNum + int(newArr[i]) * math.pow(10, x - 1)
         x -= 1
-    print(int(finalNum))
-    return finalNum
+    fin = int(finalNum)
+    print("Reversed number: " + str(fin))
 
 
 num = getNumber()
