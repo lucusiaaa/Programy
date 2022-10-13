@@ -12,31 +12,15 @@ def getArr():
 # and returns array consisting of all
 # possible sufixes of the imputed array.
 def arrayOfSufixes(arr):
-    bigArr = []
-    i = 0
-    notEmpty = True
-
     suppArr = arr.copy()
-    bigArr.append(suppArr)
-    size = len(arr)
-
-    while (notEmpty):
-        arr.pop(0)
-        bigArr.append(arr[i - (size):])
-        i += 1
-        if (arr == []):
-            notEmpty = False
-
+    bigArr = []
+    for i in range(len(suppArr) + 1):
+        bigArr.append(suppArr[i:])
     return bigArr
 
-    # TO DZIAŁA, ALE NIE ZWRACA PUSTEGO ELEMENTU
-    # bigArr=[]
-    # for i in range(len(arr)):
-    #     bigArr.append(arr[-(len(arr)-i):])
-    # return bigArr
 
 def tests():
-    assert (arrayOfSufixes(['q', 'w', 'e', 'r'])) == [['q', 'w', 'e', 'r'],['w', 'e', 'r'],['e', 'r'],['r'],[]]
+    assert (arrayOfSufixes(['q', 'w', 'e', 'r'])) == [['q', 'w', 'e', 'r'], ['w', 'e', 'r'], ['e', 'r'], ['r'], []]
     assert (arrayOfSufixes(['1', '!', ' ', 'q'])) == [['1', '!', ' ', 'q'], ['!', ' ', 'q'], [' ', 'q'], ['q'], []]
 
 

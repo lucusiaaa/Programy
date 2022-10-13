@@ -8,16 +8,20 @@ def getArr():
 
 
 # This function takes two arrays as parameters
-# and interlocks their elements.
+# and interlocks their elements. If one array is longer then another,
+# this function will add remaining elements of the longer array at the end of returned array.
 # Return an array.
-def mixArrays(arr1, arr2):
+def mixArrays(arr_1, arr_2):
+    arr1 = arr_1.copy()
+    arr2 = arr_2.copy()
+
     arr3 = [None] * (min(len(arr1), len(arr2))) * 2
 
     for i in range(min(len(arr1), len(arr2))):
         arr3[i * 2] = arr1[i]
         arr3[(i * 2) + 1] = arr2[i]
 
-    if (len(arr1) > len(arr2)):
+    if len(arr1) > len(arr2):
         arr4 = arr1[min(len(arr1), len(arr2)):]
     else:
         arr4 = arr2[min(len(arr1), len(arr2)):]

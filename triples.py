@@ -1,26 +1,35 @@
-import random
-def rand():
-    randomlist = []
-    for i in range(0,5):
-        n = random.randint(1,30)
-        randomlist.append(n)
-    randomlist.sort()
-    print(randomlist)
-    return randomlist
-
-
+# This function takes sorted array of integers and
+# returns array of triples containing integers that can create triangle.
 def triples(sortedArr):
-    arr = sortedArr.copy()
+    arrA = sortedArr.copy()
     out = []
-
-    [[[[out.append([a, b, c]) if (c < a + b) else []] for inxc, c in enumerate(arr[inxb + 1:])] for inxb, b in
-            enumerate(arr[inxa + 1:])] for inxa, a in enumerate(arr)]
-
+    ia = 0
+    for a in arrA:
+        if ia + 1 <= len(arrA):
+            arrB = arrA[ia + 1:]
+            ia += 1
+            ib = 0
+            for b in arrB:
+                if ib + 1 <= len(arrB):
+                    arrC = arrB[ib + 1:]
+                    ib += 1
+                    for c in arrC:
+                        if c < a + b:
+                            out.append([a, b, c])
     return out
 
 
+def tests():
+    assert (triples([]) == [])
+    assert (triples([1,2,3]) == [])
+    assert (triples([2, 3, 4, 5, 8]) == [[2, 3, 4], [2, 4, 5], [3, 4, 5], [4, 5, 8]])
+
+
+# def flatten(list):
+#     return [item for sublist in list for item in sublist]
+
+
 # print(triples([1,2,3]))
-print(triples([2, 3, 4, 5, 8]))
 # print(triples(rand()))
-
-
+tests()
+print(triples([2, 3, 4, 5, 8]))

@@ -1,13 +1,25 @@
 # Return an array.
 # This function get string from user and change it into array,
-# but he should separate .
+# but he should separate.
 # User should pass digits from the keyboard.
 def getArrays():
-    rocks = [int(i) for i in input("Insert the diameters of rocks: ").split(",")]
-    well = [int(j) for j in input("Insert the diameters of well levels: ").split(",")]
+    rocks = [i for i in input("Insert the diameters of rocks: ").split(",")]
+    well = [j for j in input("Insert the diameters of well levels: ").split(",")]
+
+    if rocks == ['']:
+        rocks = []
+    elif well == ['']:
+        well = []
+    else:
+        rocks = list(map(int, rocks))
+        well = list(map(int, well))
+
     return [rocks, well]
 
 
+# This function takes array containing diameters of the well and rocks
+# and calculate number of rocks which will fit into a well.
+# Returns number of rocks.
 def rockAndWell(arr):
     rocks, well = arr.copy()
     deep = len(well)
@@ -16,29 +28,25 @@ def rockAndWell(arr):
     newRocks = [rocks[i] for i in range(min(deep, len(rocks)))]
 
     newWell = []
-    newWell.append(well[0])
-    mini = max(well)
-    for level in range(1, deep):
-        mini = min(mini, well[level], well[level - 1])
+    mini = well[0]
+    for level in range(deep):
+        mini = min(mini, well[level])
         newWell.append(mini)
 
-    for rock in newRocks:
-        i = 0
-        for level in newWell:
-            if rock > level and i > 0:
-                newWell = newWell[0:(i - 1)]
+    rock = 0
+    if len(newWell) != 0 and len(newRocks) != 0:
+        for i in range(1, deep + 1):
+            if newRocks[rock] <= newWell[-i]:
                 count += 1
-                break
-
-            if rock > newWell[0]:
-                return count
-
-            if rock <= level and i <= deep - 1:
-                count += 1
-                break
-
-            i += 1
-
+                rock += 1
+                if rock >= len(newRocks):
+                    break
+            else:
+                pass
+    elif len(newWell) == 0:
+        print("There is no well here!")
+    else:
+        print("There are no rocks you can put into the well!")
     return count
 
 
