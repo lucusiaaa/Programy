@@ -24,8 +24,7 @@ def rockAndWell(arr):
     rocks, well = arr.copy()
     deep = len(well)
     count = 0
-
-    newRocks = [rocks[i] for i in range(min(deep, len(rocks)))]
+    newRocks = rocks[0:len(well)]
 
     newWell = []
     mini = well[0]
@@ -41,8 +40,6 @@ def rockAndWell(arr):
                 rock += 1
                 if rock >= len(newRocks):
                     break
-            else:
-                pass
     elif len(newWell) == 0:
         print("There is no well here!")
     else:

@@ -29,7 +29,7 @@ def differentialSequence(arr):
         for i in range(size - 1):
             suppArr.append(int(arr[i + 1]) - int(arr[i]))
 
-        arr = suppArr.copy()
+        arr = suppArr
         size = len(arr)
 
     bigArr.append(arr)
