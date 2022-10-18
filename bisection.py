@@ -36,13 +36,14 @@ def cheated(sortedArray):
 
 
 def tests():
-    assert (bisection([1, 2, 3, 4, 5])) == 0
-    assert (bisection([2, 3, 4, 5, 1])) == 4
-    assert (bisection([1, 2, 3, 4, 5, 6])) == 0
-    assert (bisection([2, 3, 4, 5, 6, 1])) == 5
-    assert (bisection([4, 5, 1, 2, 3])) == 2
-    assert (bisection([])) == None
+    assert(bisection([1, 2, 3, 4, 5])) == 0
+    assert(bisection([2, 3, 4, 5, 1])) == 4
+    assert(bisection([1, 2, 3, 4, 5, 6])) == 0
+    assert(bisection([2, 3, 4, 5, 6, 1])) == 5
+    assert(bisection([4, 5, 1, 2, 3])) == 2
+    assert(bisection([])) == None
 
 
+tests()
 print("The index of the smallest element in the array: ", bisection([4, 5, 1, 2, 3]))
 # print("The index of the smallest element in the array: ", cheated([4, 5, 1, 2, 3]))
