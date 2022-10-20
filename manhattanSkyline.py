@@ -1,3 +1,7 @@
+# Returns integer.
+# This function takes array of nonnegative integers which are the height equivalent of the Manhattan Skyline buildings
+# and searches for the area of the biggest rectangle that could fit into shape created by Manhattan Skyline.
+# Returns area of the biggest rectangle in this shape.
 def manhattanSkyline(array):
     if not array:
         return
