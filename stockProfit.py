@@ -1,51 +1,50 @@
 import random
 
 
-def rand():
-    randomlist = []
-    for i in range(0, 10):
-        n = random.randint(1, 30)
-        randomlist.append(n)
-    print(randomlist)
-    return randomlist
-
+# TODO:
+#  3 1 9 3 8 2 7 0 -> idziemy 0, max=0, maxProfit=0
+#  3 1 9 3 8 2 7 0 -> idziemy 7, max=7, maxProfit=0 (bo sprzedajemy w przód a nie w tył)
+#  3 1 9 3 8 2 7 0 -> idziemy 2, max=7, maxProfit=5 (bo 7 - 2 = 5)
+#  3 1 9 3 8 2 7 0 -> idziemy 8, max=8, maxProfit=5
+#  3 1 9 3 8 2 7 0 -> idziemy 3, max=8, maxProfit=5 (bo 8 - 3 = 5)
+#  3 1 9 3 8 2 7 0 -> idziemy 9, max=9, maxProfit=5
+#  3 1 9 3 8 2 7 0 -> idziemy 1, max=9, maxProfit=8 (bo 9 - 1 = 8)
+#  3 1 9 3 8 2 7 0 -> idziemy 3, max=9, maxProfit=8 (8 > (9-3)=6)
 
 # Returns tuple of two indexes.
-# This function takes array of nonnegative integers and searches the biggest differences in subarrays
-# consisting of integers from N to the end of array.
+# This function takes array of non-negative integers and searches the biggest differences between two numbers.
+# The index of lower number has to appear before the index of bigger number.
+# If maxProfit == 0, indexes of those numbers will be equals.
 # Returns tuple of two indexes of numbers that create the biggest difference.
 def stockProfit(array):
-    results = []
-    subArray = array.copy()
+    if not array:
+        return None
 
-    for i in range(len(array)):
-        maximum = max(subArray)
-        lookingMinArray = subArray[0:subArray.index(maximum) + 1]
-        minimum = min(lookingMinArray)
-        # print(i, "| min: ", minimum, "| max: ", maximum)
-        difference = maximum - minimum
-        results.append([array.index(minimum, i), array.index(maximum, i), difference])
-        subArray = subArray[1:]
-    differences = []
-    for i in results:
-        differences.append(i[2])
+    maxi = 0
+    maxProfit = 0
+    indexMin = len(array) - 1
+    indexMax = len(array) - 1
 
-    maxDiff = max(differences)
-    indexOfMaxDiff = differences.index(maxDiff)
-    # print("Wyniki: ", results)
-    # print("Index: ", indexOfMaxDiff, " | Wybrany wynik: ", results[indexOfMaxDiff])
-    return results[indexOfMaxDiff][0], results[indexOfMaxDiff][1]
+    for i in range(1, len(array) + 1):
+        if array[-i] >= maxi:
+            maxi = array[-i]
+            test = len(array) - i
+        elif maxProfit < maxi - array[-i]:
+            maxProfit = maxi - array[-i]
+            indexMax = test
+            indexMin = len(array) - i
+
+    return indexMin, indexMax
 
 
 def tests():
-    assert(stockProfit([0])) == (0, 0)
-    assert(stockProfit([7, 0])) == (0, 0)
-    assert(stockProfit([2, 6, 2, 4, 1])) == (0, 1)
+    assert (stockProfit([])) is None
+    assert (stockProfit([0, 0])) == (1, 1)
+    assert (stockProfit([7, 0])) == (1, 1)
+    assert (stockProfit([2, 6, 2, 4, 1])) == (0, 1)
 
 
 tests()
-print(stockProfit([2, 6, 2, 4, 1]))
-# print(stockProfit([7, 0]))
-# print(stockProfit([0]))
 
+print(stockProfit([1, 4, 8, 12, 0, 15]))
 # print(stockProfit(rand()))
