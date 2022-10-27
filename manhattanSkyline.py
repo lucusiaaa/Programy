@@ -1,37 +1,35 @@
 # Returns integer.
-# This function takes array of nonnegative integers which are the height equivalent of the Manhattan Skyline buildings
+# This function takes array of non-negative integers which are the height equivalent of the Manhattan Skyline buildings
 # and searches for the area of the biggest rectangle that could fit into shape created by Manhattan Skyline.
 # Returns area of the biggest rectangle in this shape.
 def manhattanSkyline(array):
-    if not array:
-        return
+    myArray = array.copy()
+    myArray.append(0)
+    stack = []
+    maxArea = -2
 
-    amountOfLists = max(array)
-    listOfMaxWidths = []
-    count = 0
-    for row in range(1, amountOfLists + 1):
-        maxi = 0
-        for column in array:
-            if column >= row:
-                count += 1
-                if count > maxi:
-                    maxi = count
-            else:
-                if count > maxi:
-                    maxi = count
-                    count = 0
+    if array == []:
+        return None
+
+    for i in range(len(myArray)):
+        if stack == []:
+            stack.append(i)
+        elif myArray[i] >= myArray[stack[-1]]:
+            stack.append(i)
+        else:
+            while stack != [] and myArray[i] < myArray[stack[-1]]:
+                top = stack.pop()
+                if stack == []:
+                    area = myArray[top] * i
                 else:
-                    count = 0
-        count = 0
-        listOfMaxWidths.append(maxi)
-
-    maxArea = 0
-    for i in range(amountOfLists):
-        area = listOfMaxWidths[i] * (i + 1)
-        if area > maxArea:
-            maxArea = area
+                    area = myArray[top] * (i - stack[-1] - 1)
+                maxArea = max(maxArea, area)
+            stack.append(i)
     return maxArea
 
+
+# print("Area of the biggest rectangle in shape created by Manhattan Skyline: ",
+#       manhattanSkyline([2,3,2,2,2]))
 
 def tests():
     assert (manhattanSkyline([3, 1, 4, 3, 5, 7, 5, 4, 1, 0, 3, 5, 0, 9, 8])) == 18
@@ -40,4 +38,5 @@ def tests():
 
 
 tests()
-print("Area of the biggest rectangle in shape created by Manhattan Skyline: ", manhattanSkyline([3, 1, 4, 3, 5, 7, 5, 4, 1, 0, 3, 5, 0, 9, 8]))
+print("Area of the biggest rectangle in shape created by Manhattan Skyline: ",
+      manhattanSkyline([3, 1, 4, 3, 5, 7, 5, 4, 1, 0, 3, 5, 0, 9, 8]))
