@@ -20,7 +20,8 @@ def stockProfit(array):
     if not array:
         return None
 
-    maxi = 0
+    maxi = array[-1]
+    temp = len(array) - 1
     maxProfit = 0
     indexMin = len(array) - 1
     indexMax = len(array) - 1
@@ -28,10 +29,10 @@ def stockProfit(array):
     for i in range(1, len(array) + 1):
         if array[-i] >= maxi:
             maxi = array[-i]
-            test = len(array) - i
+            temp = len(array) - i
         elif maxProfit < maxi - array[-i]:
             maxProfit = maxi - array[-i]
-            indexMax = test
+            indexMax = temp
             indexMin = len(array) - i
 
     return indexMin, indexMax

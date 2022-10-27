@@ -8,13 +8,12 @@ def bisection(sortedArray):
         return None
     leftEnd = 0
     rightEnd = len(sortedArray) - 1
-    middle = leftEnd + int((rightEnd - leftEnd) / 2)
     while leftEnd < rightEnd:
+        middle = leftEnd + int((rightEnd - leftEnd) / 2)
         if sortedArray[middle] > sortedArray[rightEnd]:
             leftEnd = middle + 1
         else:
             rightEnd = middle
-        middle = leftEnd + int((rightEnd - leftEnd) / 2)
     return middle
 
 

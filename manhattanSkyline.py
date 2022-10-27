@@ -3,13 +3,13 @@
 # and searches for the area of the biggest rectangle that could fit into shape created by Manhattan Skyline.
 # Returns area of the biggest rectangle in this shape.
 def manhattanSkyline(array):
+    if array == []:
+        return None
+
     myArray = array.copy()
     myArray.append(0)
     stack = []
     maxArea = -2
-
-    if array == []:
-        return None
 
     for i in range(len(myArray)):
         if stack == []:
