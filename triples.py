@@ -1,7 +1,7 @@
 # This function takes sorted array of integers and
 # returns array of triples containing integers that can create triangle.
 def triples(sortedArr):
-    arrA = sortedArr.copy()
+    arrA = sortedArr
     out = []
     ia = 0
     for a in arrA:
@@ -21,15 +21,9 @@ def triples(sortedArr):
 
 def tests():
     assert (triples([]) == [])
-    assert (triples([1,2,3]) == [])
+    assert (triples([1, 2, 3]) == [])
     assert (triples([2, 3, 4, 5, 8]) == [[2, 3, 4], [2, 4, 5], [3, 4, 5], [4, 5, 8]])
 
 
-# def flatten(list):
-#     return [item for sublist in list for item in sublist]
-
-
-# print(triples([1,2,3]))
-# print(triples(rand()))
 tests()
 print(triples([2, 3, 4, 5, 8]))
