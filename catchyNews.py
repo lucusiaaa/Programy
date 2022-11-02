@@ -2,18 +2,18 @@
 # This function takes array of non-negative integers which are equivalent to the incidence of COVID-19
 # in the last X days and returns an array containing information on how long backwards this has been the case.
 def catchyNews(array):
-    if array:
+    if array == []:
         return None
-    myArray = array.copy()
+
     stack = []
     limitIndexArray = []
     theGreatestFromArray = []
 
-    for i in range(len(myArray)):
+    for i in range(len(array)):
         if not stack:
             limitIndexArray.append(0)
         else:
-            while stack != [] and myArray[i] > myArray[stack[-1]]:
+            while stack != [] and array[i] > array[stack[-1]]:
                 stack.pop()
             if not stack:
                 limitIndexArray.append(0)
@@ -23,6 +23,7 @@ def catchyNews(array):
 
     for i in range(len(limitIndexArray)):
         theGreatestFromArray.append(i - limitIndexArray[i] + 1)
+
     return theGreatestFromArray
 
 
