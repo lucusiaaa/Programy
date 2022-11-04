@@ -1,19 +1,7 @@
 # Returns array.
 # This function takes integer N as parameter and returns array consisting of numbers from 1 to N.
 def arrayFromNumber(N):
-    return [i for i in range(1, int(N + 1))]
-
-
-# Returns array
-# This function takes integer and array as parameters and returns new array in which passed element doesn't appear.
-def skipElementInArr(element, arr):
-    newArr = []
-    for i in arr:
-        if i == element:
-            continue
-        else:
-            newArr.append(i)
-    return newArr
+    return list(range(1, N + 1))
 
 
 # Returns array of arrays
@@ -25,9 +13,9 @@ def permutation(arr):
     allArr = []
 
     if len(arr) >= 2:
-        for i in arr:
-            for j in permutation(skipElementInArr(i, arr)):
-                j.insert(0, i)
+        for i in range(len(arr)):
+            for j in permutation(arr[:i]+arr[i+1:]):
+                j.append(arr[i])
                 newArr = j
                 allArr.append(newArr)
         return allArr
