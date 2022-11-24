@@ -4,110 +4,103 @@ import timeit
 
 # Tworzy dziurawą szachownicę
 def createChessboard():
-    return [[True, None, True, True, None, True, True, True],
-            [True, None, True, True, None, True, True, None],
-            [None, True, None, True, True, True, True, None],
-            [True, None, True, None, None, True, True, True],
-            [True, None, True, None, True, True, None, True],
-            [True, None, True, True, None, True, True, None],
-            [None, True, None, None, True, True, None, None],
-            [True, None, True, True, True, None, None, True]]
+    return [[0, -1, 0, 0, -1, 0, 0, 0],
+            [0, -1, 0, 0, -1, 0, 0, -1],
+            [-1, 0, -1, 0, 0, 0, 0, -1],
+            [0, -1, 0, -1, -1, 0, 0, 0],
+            [0, -1, 0, -1, 0, 0, -1, 0],
+            [0, -1, 0, 0, -1, 0, 0, -1],
+            [-1, 0, -1, -1, 0, 0, -1, -1],
+            [0, -1, 0, 0, 0, -1, -1, 0]]
 
 
 def createChessboard2():
-    return [[True, None, True],
-            [True, True, True],
-            [None, True, True]]
+    return [[0, -1, 0],
+            [0, 0, 0],
+            [-1, 0, 0]]
 
 
-# Wypisanie dziurawej szachownicy
+def createChessboard3():
+    return [[0, -1, 0, 0, -1],
+            [0, -1, 0, 0, -1],
+            [-1, 0, -1, 0, 0],
+            [0, -1, 0, -1, -1],
+            [0, -1, 0, -1, 0]]
+
+def createChessboard4():
+    return [[0, -1, 0, 0, -1, 0, 0],
+            [0, -1, 0, 0, -1, 0, 0],
+            [-1, 0, -1, 0, 0, 0, 0],
+            [0, -1, 0, -1, -1, 0, 0],
+            [0, -1, 0, -1, 0, 0, -1],
+            [0, -1, 0, 0, -1, 0, 0],
+            [-1, 0, -1, -1, 0, 0, -1]]
+
+# # Wypisanie dziurawej szachownicy
 def printChessboard(chessboard):
     for i in chessboard:
-        for j in i:
-            if j is None:
-                print("- ", end="")
-            elif j:
-                print("O ", end="")
-            else:
-                print("X ", end="")
-        print()
+        print(i)
 
 
 # Oblicza wszystkie ruchy, które może wykonać koń
 def possibleMoves(x, y, chessboard):
     allPossibleMoves = []
-    if 0 <= x + 2 <= 7 and 0 <= y - 1 <= 7 and chessboard[y - 1][x + 2] is True:
+    length = len(chessboard) - 1
+    if 0 <= x + 2 <= length and 0 <= y - 1 <= length and chessboard[y - 1][x + 2] == 0:
         allPossibleMoves.append([x + 2, y - 1])
-    if 0 <= x + 2 <= 7 and 0 <= y + 1 <= 7 and chessboard[y + 1][x + 2] is True:
+    if 0 <= x + 2 <= length and 0 <= y + 1 <= length and chessboard[y + 1][x + 2] == 0:
         allPossibleMoves.append([x + 2, y + 1])
-    if 0 <= x - 2 <= 7 and 0 <= y - 1 <= 7 and chessboard[y - 1][x - 2] is True:
+    if 0 <= x - 2 <= length and 0 <= y - 1 <= length and chessboard[y - 1][x - 2] == 0:
         allPossibleMoves.append([x - 2, y - 1])
-    if 0 <= x - 2 <= 7 and 0 <= y + 1 <= 7 and chessboard[y + 1][x - 2] is True:
+    if 0 <= x - 2 <= length and 0 <= y + 1 <= length and chessboard[y + 1][x - 2] == 0:
         allPossibleMoves.append([x - 2, y + 1])
-    if 0 <= x + 1 <= 7 and 0 <= y - 2 <= 7 and chessboard[y - 2][x + 1] is True:
+    if 0 <= x + 1 <= length and 0 <= y - 2 <= length and chessboard[y - 2][x + 1] == 0:
         allPossibleMoves.append([x + 1, y - 2])
-    if 0 <= x + 1 <= 7 and 0 <= y + 2 <= 7 and chessboard[y + 2][x + 1] is True:
+    if 0 <= x + 1 <= length and 0 <= y + 2 <= length and chessboard[y + 2][x + 1] == 0:
         allPossibleMoves.append([x + 1, y + 2])
-    if 0 <= x - 1 <= 7 and 0 <= y - 2 <= 7 and chessboard[y - 2][x - 1] is True:
+    if 0 <= x - 1 <= length and 0 <= y - 2 <= length and chessboard[y - 2][x - 1] == 0:
         allPossibleMoves.append([x - 1, y - 2])
-    if 0 <= x - 1 <= 7 and 0 <= y + 2 <= 7 and chessboard[y + 2][x - 1] is True:
+    if 0 <= x - 1 <= length and 0 <= y + 2 <= length and chessboard[y + 2][x - 1] == 0:
         allPossibleMoves.append([x - 1, y + 2])
     return allPossibleMoves
 
 
-# def possibleMoves(x, y, chessboard):
-#     allPossibleMoves = []
-#     if 0 <= x + 2 <= 2 and 0 <= y - 1 <= 2 and chessboard[y - 1][x + 2] is True:
-#         allPossibleMoves.append([x + 2, y - 1])
-#     if 0 <= x + 2 <= 2 and 0 <= y + 1 <= 2 and chessboard[y + 1][x + 2] is True:
-#         allPossibleMoves.append([x + 2, y + 1])
-#     if 0 <= x - 2 <= 2 and 0 <= y - 1 <= 2 and chessboard[y - 1][x - 2] is True:
-#         allPossibleMoves.append([x - 2, y - 1])
-#     if 0 <= x - 2 <= 2 and 0 <= y + 1 <= 2 and chessboard[y + 1][x - 2] is True:
-#         allPossibleMoves.append([x - 2, y + 1])
-#     if 0 <= x + 1 <= 2 and 0 <= y - 2 <= 2 and chessboard[y - 2][x + 1] is True:
-#         allPossibleMoves.append([x + 1, y - 2])
-#     if 0 <= x + 1 <= 2 and 0 <= y + 2 <= 2 and chessboard[y + 2][x + 1] is True:
-#         allPossibleMoves.append([x + 1, y + 2])
-#     if 0 <= x - 1 <= 2 and 0 <= y - 2 <= 2 and chessboard[y - 2][x - 1] is True:
-#         allPossibleMoves.append([x - 1, y - 2])
-#     if 0 <= x - 1 <= 2 and 0 <= y + 2 <= 2 and chessboard[y + 2][x - 1] is True:
-#         allPossibleMoves.append([x - 1, y + 2])
-#     return allPossibleMoves
+def move(x=0, y=0, chessboard=createChessboard(), moveNr=0):
+    chessboard[y][x] = moveNr + 1
+    maxChessBoard = chessboard
+    result = possibleMoves(x, y, chessboard)
+    while result:
+        oneMove = result.pop()
+        tempChess = move(oneMove[0], oneMove[1], copy.deepcopy(chessboard), moveNr + 1)
+        if max(max(tempChess)) >= max(max(maxChessBoard)):
+            maxChessBoard = tempChess
+    return copy.deepcopy(maxChessBoard)
 
+    # TODO: tu po prostu przypisac do szachownicy [x,y] -> False
+    # if len(possibleMoves(x, y, updatedChessboard)) > 1:
+    #     maxCount = 0
+    #     maxChessBoard = []
+    #     for oneX, oneY in possibleMoves(x, y, updatedChessboard):
+    #         # TODO: zamiast tego deepcopy
+    #         moveCount, board = move(oneX, oneY, copy.deepcopy(updatedChessboard))
+    #         if moveCount > maxCount:
+    #             maxCount = moveCount
+    #             maxChessBoard = board
+    #     # TODO: tu przypisac szachownice [x,y] z powrotem na -> True
+    #     return [maxCount + 1, maxChessBoard]
+    # # TODO: ten człon wyrzucić i zawrzeć go w tym wyzej
+    # elif possibleMoves(x, y, updatedChessboard):
+    #     x1, y1 = possibleMoves(x, y, updatedChessboard)[0]
+    #     moveCount, board = copy.deepcopy(move(x1, y1, updatedChessboard))
+    #     return [moveCount + 1, board]
+    # else:
+    #     # TODO: tutaj dac deepcopy
+    #     return [0, updatedChessboard]
 
-# Aktualizuje pole, które odwiedził koń
-def updateChessboardField(x, y, chessboard):
-    if chessboard[y][x] is True:
-        chessboard[y][x] = False
-    return chessboard
-
-
-def move(x=0, y=0, chessboard=createChessboard()):
-    # updatedChessboard <- nowa plansza ze zaktualizowanym polem na którym stoimy
-    updatedChessboard = copy.deepcopy(chessboard)
-    updatedChessboard = updateChessboardField(x, y, updatedChessboard)
-    if len(possibleMoves(x, y, updatedChessboard)) > 1:
-        maxCount = 0
-        maxChessBoard = []
-        for oneX, oneY in possibleMoves(x, y, updatedChessboard):
-            moveCount, board = move(oneX, oneY, copy.deepcopy(updatedChessboard))
-            if moveCount > maxCount:
-                maxCount = copy.deepcopy(moveCount)
-                maxChessBoard = copy.deepcopy(board)
-        return [maxCount + 1, maxChessBoard]
-    elif possibleMoves(x, y, updatedChessboard):
-        x1, y1 = possibleMoves(x, y, updatedChessboard)[0]
-        moveCount, board = copy.deepcopy(move(x1, y1, updatedChessboard))
-        return [moveCount + 1, board]
-    else:
-        return [0, updatedChessboard]
-
-
-a, b = move()
-print(a, b)
-printChessboard(b)
-
+#
+# chess = move()
+# # print(move())
+# printChessboard(chess)
 
 def timer():
     print('functionName: ', timeit.timeit(move, number=1))
