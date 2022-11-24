@@ -76,34 +76,12 @@ def move(x=0, y=0, chessboard=createChessboard(), moveNr=0):
             maxChessBoard = tempChess
     return copy.deepcopy(maxChessBoard)
 
-    # TODO: tu po prostu przypisac do szachownicy [x,y] -> False
-    # if len(possibleMoves(x, y, updatedChessboard)) > 1:
-    #     maxCount = 0
-    #     maxChessBoard = []
-    #     for oneX, oneY in possibleMoves(x, y, updatedChessboard):
-    #         # TODO: zamiast tego deepcopy
-    #         moveCount, board = move(oneX, oneY, copy.deepcopy(updatedChessboard))
-    #         if moveCount > maxCount:
-    #             maxCount = moveCount
-    #             maxChessBoard = board
-    #     # TODO: tu przypisac szachownice [x,y] z powrotem na -> True
-    #     return [maxCount + 1, maxChessBoard]
-    # # TODO: ten człon wyrzucić i zawrzeć go w tym wyzej
-    # elif possibleMoves(x, y, updatedChessboard):
-    #     x1, y1 = possibleMoves(x, y, updatedChessboard)[0]
-    #     moveCount, board = copy.deepcopy(move(x1, y1, updatedChessboard))
-    #     return [moveCount + 1, board]
-    # else:
-    #     # TODO: tutaj dac deepcopy
-    #     return [0, updatedChessboard]
 
+chess = move()
+printChessboard(chess)
+
+# def timer():
+#     print('functionName: ', timeit.timeit(move, number=1))
 #
-# chess = move()
-# # print(move())
-# printChessboard(chess)
-
-def timer():
-    print('functionName: ', timeit.timeit(move, number=1))
-
-
-timer()
+#
+# timer()
