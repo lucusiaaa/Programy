@@ -1,7 +1,9 @@
 # Returns array and integer.
 # This function checks if passed array contains subarray which summarized element are equal to passed integer.
 def caterpillar(array, number):
+    # caterpi[] <- subarray of array[] which is used for summarizing numbers in array[] in linear time
     caterpi = []
+
     for i in array:
         if sum(caterpi) < number:
             caterpi.append(i)
