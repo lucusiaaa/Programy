@@ -1,16 +1,23 @@
 # Returns array and integer.
 # This function checks if passed array contains subarray which summarized element are equal to passed integer.
 def caterpillar(array, number):
-    # caterpi[] <- subarray of array[] which is used for summarizing numbers in array[] in linear time
-    caterpi = []
+    # start <- index indicating begin of the subarray
+    start = 0
+    # end <- index indicating end of the subarray
+    end = 0
+    # sum <- summarized elements in subarray
+    suma = 0
 
-    for i in array:
-        if sum(caterpi) < number:
-            caterpi.append(i)
-        elif sum(caterpi) > number:
-            caterpi.pop(0)
+    while end <= len(array) and start < len(array):
+        if suma < number:
+            if end < len(array):
+                suma += array[end]
+            end += 1
+        elif suma > number:
+            suma -= array[start]
+            start += 1
         else:
-            return caterpi, number
+            return array[start: end], number
     return None, number
 
 
@@ -25,6 +32,8 @@ def printCaterpillar(caterpi, number):
 def tests():
     result, number = caterpillar([1, 3, 10, 6, 3, 5, 2], 21)
     assert result is None
+    result, number = caterpillar([1, 3, 10, 6, 3, 5, 2], 7)
+    assert result == [5, 2]
     result, number = caterpillar([1, 3, 10, 8, 3, 5, 2], 21)
     assert result == [3, 10, 8]
     result, number = caterpillar([0, 0, 0, 1, 0, 0, 1, 0, 0], 2)
@@ -42,4 +51,6 @@ printCaterpillar(arr, num)
 arr, num = caterpillar([0, 0, 0, 1, 0, 0, 1, 0, 0], 2)
 printCaterpillar(arr, num)
 arr, num = caterpillar([], 2)
+printCaterpillar(arr, num)
+arr, num = caterpillar([1, 3, 10, 6, 3, 5, 2], 7)
 printCaterpillar(arr, num)
