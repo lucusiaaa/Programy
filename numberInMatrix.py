@@ -23,8 +23,6 @@ def numberInMatrix(matrix, number):
             allNumbers += 1
             x += 1
             y -= 1
-            if x > len(matrix) - 1 or y < 0:
-                return allNumbers
         if y < 0 or x > len(matrix) - 1:
             return allNumbers
         checked = matrix[x][y]
