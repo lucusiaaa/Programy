@@ -3,32 +3,33 @@ class Node:
         self.value = value
         self.left_child = None
         self.right_child = None
+        self.globalArr = []
 
     def preorder(self):
-        returned = [self.value]
+        self.globalArr = [self.value]
         if self.left_child is not None:
-            returned += self.left_child.preorder()
+            self.globalArr += self.left_child.preorder()
         if self.right_child is not None:
-            returned += self.right_child.preorder()
-        return returned
+            self.globalArr += self.right_child.preorder()
+        return self.globalArr
 
     def inorder(self):
-        returned = []
+        self.globalArr = []
         if self.left_child is not None:
-            returned += self.left_child.inorder()
-        returned.append(self.value)
+            self.globalArr += self.left_child.inorder()
+        self.globalArr += self.value
         if self.right_child is not None:
-            returned += self.right_child.inorder()
-        return returned
+            self.globalArr += self.right_child.inorder()
+        return self.globalArr
 
     def postorder(self):
-        returned = []
+        self.globalArr = []
         if self.left_child is not None:
-            returned += self.left_child.postorder()
+            self.globalArr += self.left_child.postorder()
         if self.right_child is not None:
-            returned += self.right_child.postorder()
-        returned.append(self.value)
-        return returned
+            self.globalArr += self.right_child.postorder()
+        self.globalArr += self.value
+        return self.globalArr
 
 
 root = Node("a")
