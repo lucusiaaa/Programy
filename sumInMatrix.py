@@ -39,17 +39,14 @@ def summarizedRectangle(array, number):
                 while ex < len(matrix[0]):
                     sums = chosenSums(ex, ey, matrix, sx, sy)
 
-                    if (sums < number and ex == len(matrix[0])) or sx == ex == len(matrix[0]):
-                        break
                     if sums > number:
                         sx += 1
                         continue
-                    if sums < number and ex < len(matrix[0]):
+                    if sums < number:
                         ex += 1
                     if sums == number:
                         for i in array[sy:ey + 1]:
                             finMatrix.append(i[sx:ex + 1])
-
                         return finMatrix
                 ey += 1
                 ex = 0
@@ -63,17 +60,14 @@ def summarizedRectangle(array, number):
                 while ey < len(matrix):
                     sums = chosenSums(ex, ey, matrix, sx, sy)
 
-                    if (sums < number and ey == len(matrix)) or sy == ey == len(matrix):
-                        break
                     if sums > number:
                         sy += 1
                         continue
-                    if sums < number and ey < len(matrix):
+                    if sums < number:
                         ey += 1
                     if sums == number:
                         for i in array[sy:ey + 1]:
                             finMatrix.append(i[sx:ex + 1])
-
                         return finMatrix
                 ex += 1
                 ey = 0
@@ -98,13 +92,10 @@ def chosenSums(ex, ey, matrix, sx, sy):
 
 arr = [[3, 6, 0, 6, 5, 8, 4, 9],
        [1, 9, 8, 4, 6, 1, 2, 9],
-       [1, 7, 3, 9, 1, 9, 9, 6],
-       [2, 5, 9, 8, 0, 3, 8, 4],
        [1, 9, 8, 4, 6, 7, 2, 9],
        [1, 4, 8, 4, 6, 7, 2, 9],
        [1, 7, 3, 9, 5, 9, 9, 6],
        [2, 5, 9, 8, 0, 3, 8, 4],
        [1, 1, 6, 6, 7, 8, 0, 400]]
 
-
-print(summarizedRectangle(arr, 9))
+print(summarizedRectangle(arr, 10))
