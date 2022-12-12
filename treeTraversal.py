@@ -3,34 +3,51 @@ class Node:
         self.value = value
         self.left_child = None
         self.right_child = None
-        self.globalArr = []
 
     def preorder(self):
-        self.globalArr = [self.value]
+        global returned
+        returned_local = []
+        self._preorder(returned_local)
+        returned = returned_local
+        return returned
+
+    def _preorder(self, returned):
+        returned.append(self.value)
         if self.left_child is not None:
-            self.globalArr += self.left_child.preorder()
+            self.left_child._preorder(returned)
         if self.right_child is not None:
-            self.globalArr += self.right_child.preorder()
-        return self.globalArr
+            self.right_child._preorder(returned)
 
     def inorder(self):
-        self.globalArr = []
+        global returned
+        returned_local = []
+        self._inorder(returned_local)
+        returned = returned_local
+        return returned
+
+    def _inorder(self, returned):
         if self.left_child is not None:
-            self.globalArr += self.left_child.inorder()
-        self.globalArr += self.value
+            self.left_child._inorder(returned)
+        returned.append(self.value)
         if self.right_child is not None:
-            self.globalArr += self.right_child.inorder()
-        return self.globalArr
+            self.right_child._inorder(returned)
 
     def postorder(self):
-        self.globalArr = []
-        if self.left_child is not None:
-            self.globalArr += self.left_child.postorder()
-        if self.right_child is not None:
-            self.globalArr += self.right_child.postorder()
-        self.globalArr += self.value
-        return self.globalArr
+        global returned
+        returned_local = []
+        self._postorder(returned_local)
+        returned = returned_local
+        return returned
 
+    def _postorder(self, returned):
+        if self.left_child is not None:
+            self.left_child._postorder(returned)
+        if self.right_child is not None:
+            self.right_child._postorder(returned)
+        returned.append(self.value)
+
+
+returned = []
 
 root = Node("a")
 
